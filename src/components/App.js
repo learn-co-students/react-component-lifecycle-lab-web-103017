@@ -23,11 +23,24 @@ class App extends React.Component {
 
   cleanUpInterval = () => clearInterval(this.interval);
 
+  componentDidMount() {
+    this.startInterval()
+  }
+
+
+
   fetchTweets = () => {
     const newTweets = getTweets();
     this.setState({
       latestTweets: newTweets
     });
+  }
+
+  componentWillMount() {
+    this.fetchTweets()
+  }
+  componentWillUnmount() {
+    this.cleanUpInterval()
   }
 
   render() {
@@ -38,5 +51,6 @@ class App extends React.Component {
     )
   }
 }
+
 
 export default App;
